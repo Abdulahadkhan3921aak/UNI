@@ -1,0 +1,11 @@
+﻿  1SemesterProject.cpp
+F:\MY_PRIVATE_FOLDER\UNI\PF_LAB\1SemesterProject\1SemesterProject.cpp(34,1): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned long', possible loss of data
+F:\MY_PRIVATE_FOLDER\UNI\PF_LAB\1SemesterProject\1SemesterProject.cpp(105,1): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned long', possible loss of data
+F:\MY_PRIVATE_FOLDER\UNI\PF_LAB\1SemesterProject\1SemesterProject.cpp(138,1): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned long', possible loss of data
+F:\MY_PRIVATE_FOLDER\UNI\PF_LAB\1SemesterProject\1SemesterProject.cpp(146,29): warning C4018: '<': signed/unsigned mismatch
+F:\MY_PRIVATE_FOLDER\UNI\PF_LAB\1SemesterProject\1SemesterProject.cpp(166,31): warning C4018: '<': signed/unsigned mismatch
+F:\MY_PRIVATE_FOLDER\UNI\PF_LAB\1SemesterProject\1SemesterProject.cpp(199,39): warning C4018: '<': signed/unsigned mismatch
+F:\MY_PRIVATE_FOLDER\UNI\PF_LAB\1SemesterProject\1SemesterProject.cpp(196,17): warning C4102: 'LIST_': unreferenced label
+F:\MY_PRIVATE_FOLDER\UNI\PF_LAB\1SemesterProject\1SemesterProject.cpp(280,1): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned long', possible loss of data
+F:\MY_PRIVATE_FOLDER\UNI\PF_LAB\1SemesterProject\1SemesterProject.cpp(321,1): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned long', possible loss of data
+  1SemesterProject.vcxproj -> F:\MY_PRIVATE_FOLDER\UNI\PF_LAB\1SemesterProject\x64\Debug\1SemesterProject.exe

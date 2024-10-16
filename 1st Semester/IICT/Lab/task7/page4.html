@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html len="en">
+
+<head>
+    <title>Input Types in HTML</title>
+    <script type="text/javascript" nonce="bc23e2946fdc4504b68e5af8714"
+        src="//local.adguard.org?ts=1695384641405&amp;type=content-script&amp;dmn=doc-0k-78-docs.googleusercontent.com&amp;pth=%2Fdocs%2Fsecuresc%2F38i28b04c015ft2bg3u9ndu23e7ojo7e%2F5cnpl4s78110jk93cnforgockqq4ft8k%2F1695386475000%2F17984510215109876861%2F17984510215109876861%2F1JSG4I-UOuKdg2_nXEkbe5g1y82Pl6EBb%3Fe%3Ddownload%26ax%3DAA75yW4s1dtjTtH8_4kQYETfer7C95_Dtvwq-XCjSWvIxfv3j5X6VT9TSbNHe_41TwTewaVKti6pQc3C7_L1KdlICM8b737XyHgdt9WqltTOtnnJezy5Yij6UGsee_Nw3GxeG8gN1KodhXOYIBNGi1GpQcAAPoCoaGz7oDwJtzD1N6HFt3U-eIvzwElT04nJHWvKs_y2XOuD0JU5mx_uYs5jy58M43sgEwNQldYdmJBrfxFJTcc8rviGsN3L9feeS1bvIhl_vQA91QI774tuxUGAXnwFQ2-LP10A7v6mrFxA3xfR3rrBh7I67AEhuxnTzfwJDDSPEbA2uzH31e84XCJdtI5i-WuI-m9OtY33IwED5l--yd50YS7RqcNcCy-PNjNags9eumsnGVZWwHQVRljlomFxxDPyT41WRUEX8STeGOVSQiVqltsesfXP4dATbiLY6QbNfu_k5LCOtjd6JBijhRGRgCrSvd33IYJot7EG7P6TeHhBuYWVVvj0Zv6hPTOBoMpDln9iGsp3OMTA1NnL3X3qusn9duyCBLHpvX2-ctBSvsHoV28X-92w1nPEJBpSDO2sUZobLHvr3YixGvG0bYpSiapDSNe4G1FUG9oxwSotxkJik-GwkRdSgQhsCrqH2NoxsNtl6VfJ_gk-6KVh6FD-7oJKZbovI98hpmltwbk55gW1HNeLNWQAsh9YbVG3DeZHhzFVLg8w0sBLuTE5xo9XBhyUuxIxWIy3pZS3CYc42Fp90o7VmPexklz3fHa7Q5he1IDVN6_j0ujFBm1jnx-WUuZoOjkaZFyfgLXiH17jinVuoibtkIMDWzUT0eCf2fejT2ojdlY7rwiF833Wfx7INKR_gm8GGRV7VcWvPjnjWvOEkURnWk47ooCKdJKaWVHtmB80YGN5vka3VFOggl_rMsF_i3UQj4x-jT0%26uuid%3Dd6a716ee-187e-4dee-b84e-b210233fb340%26authuser%3D1&amp;app=opera.exe&amp;css=3&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1&amp;stealth=1&amp;uag="></script>
+    <script type="text/javascript" nonce="bc23e2946fdc4504b68e5af8714"
+        src="//local.adguard.org?ts=1695384641405&amp;name=AdGuard%20Assistant&amp;name=AdGuard%20Extra&amp;name=AdGuard%20Popup%20Blocker&amp;type=user-script"></script>
+</head>
+<style>
+    * {
+        font-family: 'Source Serif Pro', serif;
+    }
+
+    #navbar ul {
+        align-self: center;
+        align-items: center;
+        list-style: none;
+        display: inline-block;
+        background-color: #ffc79d;
+        border: #ff8f39 1px solid;
+        overflow: hidden;
+        border-radius: 10px;
+        margin: 30px;
+    }
+
+    #navbar ul li {
+        float: left;
+        padding: 20px 10px;
+
+    }
+
+    #navbar ul li a {
+        font-size: 18px;
+        font-weight: bold;
+        text-decoration: none;
+        color: #a14600;
+
+    }
+
+    #navbar ul li:hover {
+        background-color: #ff9f55;
+
+    }
+
+    #navbar ul li a:hover {
+        color: white;
+
+    }
+
+    .example {
+        background-color: #f7d0aa;
+        padding: 10px 0px;
+        block-size: auto;
+
+    }
+
+    .Example {
+        background-color: #e4e44e;
+        padding: 1px 1px;
+
+    }
+
+    .examplePresent {
+        background-color: #ffffff;
+        padding: 10px 6px;
+
+    }
+
+    .MianHeading {
+        font-size: 64px;
+    }
+
+    .heading {
+        padding: 7px;
+        background-color: #db9553;
+        align-self: center;
+        align-items: center;
+    }
+
+    .FormsInput {
+        padding: 8px 8px 15px 15px;
+        font-size: large;
+        align-self: center;
+        align-items: center;
+        background-color: #fcbb7d;
+        display: inline-block;
+    }
+
+    body {
+        align-items: center;
+        background-color: #f3d5b9;
+        color: rgb(72, 52, 10);
+    }
+</style>
+
+<body align="center">
+    <div align="center">
+        <h1 class="MianHeading">Input &nbsp; Forms &nbsp; in &nbsp; HTML</h1>
+    </div>
+
+    <h1 class="heading">Input Forms </h1>
+    <p class="FormsInput">
+        Input in HTML can be of many Types like Email , Password , Button , Text etc.
+        some Example of Input Types are :
+    </p>
+    <h2>Example of Email Input Type :</h2>
+    <input type="email">
+
+    <h2>Example of Text Input Type :</h2>
+    <input type="text">
+
+    <h2>Example of Password Input Type :</h2>
+    <input type="password">
+
+    <h2>Example of Email Input Type :</h2>
+    <input type="checkbox">
+
+    <h2>Example of Text Input Type :</h2>
+    <input type="date">
+
+    <h2>Example of Password Input Type :</h2>
+    <input type="range"><br>
+    <div class="FormsInput">
+        <p class="FormsInput">To use an Input Type the &#60 input &#62 tag is used <br>The following
+            is the syntex of using
+            input tag</p>
+        </p>
+        <div class="example">
+            &#60 input type="the type you want" &#62
+        </div>
+    </div>
+
+    <nav id="navbar">
+        <ul>
+            <li><a href="./page1.html">Html and CSS</a></li>
+            <li><a href="./page2.html">Tables in HTML</a></li>
+            <li><a href="./page3.html">Multimedia in HTML</a></li>
+            <li><a href="./index.html">Profile</a></li>
+
+        </ul>
+    </nav>
+</body>
+
+</html>

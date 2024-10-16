@@ -1,0 +1,9 @@
+{
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "f:\\My_Private_Folder\\UNI\\3rd Semester\\DSA\\project\\Main",
+            "binaryPath": "f:\\My_Private_Folder\\UNI\\3rd Semester\\DSA\\project\\Main\\3rdSemester.exe",
+            "binaryArgs": []
+        }
+    ]
+}

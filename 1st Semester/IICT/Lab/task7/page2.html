@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html len="en">
+
+<head>
+    <title>Tables in HTML</title>
+    <script type="text/javascript" nonce="bc23e2946fdc4504b68e5af8714"
+        src="//local.adguard.org?ts=1695384641405&amp;type=content-script&amp;dmn=doc-00-78-docs.googleusercontent.com&amp;pth=%2Fdocs%2Fsecuresc%2F38i28b04c015ft2bg3u9ndu23e7ojo7e%2Fq220aq984ilm64v38m7j5tm9iptp6578%2F1695386475000%2F17984510215109876861%2F17984510215109876861%2F1O1tkm_riO1qY-IvTomWN_q2oh6D8WRTz%3Fe%3Ddownload%26ax%3DAA75yW5YzcBqcQdjcet6bNUBLI6Gt4iWipigMkBMDqZbUQVMktEhVuvNCKmn8CXzBOBncZbNVYp0ukuXSt64SK5N0hppKrp7C1EdgbgiHB4GpcxamBH4AKIjmeKB1_LexKLUGd08unoC1hC9ETgX9ZNZBiAjjnbP4ygA_CCYmsREJ_DdHuDs-G9Zm2XrOQeFHPLoFBs7HbobSm8zVms628RcNukM0ql41yW-0GiCBhDW6mkQk5aZdncHYpqbI0JPVBm4Oi8262t632WCSnT0TDxqX2YzU30ZxnyOU3dmEY7XCCidQJeB4bk__qpx_YcU6Lxw7rKW5c-wCiOL7xpL2LUU0g7qasTQNGvQzJ-KoNE2M0_JZG_48AFosX8Aff7hw-0qwtJYNRy47swa-dCL4wHQWp8yTqdAffWW3zAPQWYUSjVEOtxlQGUYQWFmDYKJdZcq8zXYkufSBpINoUrZjYLIAcdcrIEk4VENwTDUNdlCwX-cU8xGoyn_HVePyt6FgC8xT6y28DyiUuUn-IkSYVZ2m_0e6p4BBNXNKtVCyoZTTOmcYpdx9HySUOs-oYnzqKRrjRPgLf5jfJazL9cgBSjYLT6e0wnvTzAs2ZxqJAW6En7aQtwA2FDzS_HNNvJdykdn5xKe0U25gO-cejL8Cil6xNLNs1Pxa7dpIic5ZfGWrZkIUn30xbkv4WPP9WMqeY0XfIqoANuQNibFEBa1wJwvE6sBrTo-J5JtlPutqhOPvacRTMJHsG4Lt9_6dkcNxyTTNeXAcEMYWI-AynFr7KkQL3oGJL6vA4eebOlnQFLymMhPv6EJ55NQHBI6hqdBHMZoJYqVCH3w1Y1C3WTeRD80HBmFi1g3DSdJXUBdRl7fK7jN6pe72PoHLcIFQu7tRGwKu6qjl5Hp5rRHgfFXtGcUhnwe5pDJssysJnXFGlg%26uuid%3D7fa194b4-9a7f-4e20-bcec-eafa15ad0434%26authuser%3D1&amp;app=opera.exe&amp;css=3&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1&amp;stealth=1&amp;uag="></script>
+    <script type="text/javascript" nonce="bc23e2946fdc4504b68e5af8714"
+        src="//local.adguard.org?ts=1695384641405&amp;name=AdGuard%20Assistant&amp;name=AdGuard%20Extra&amp;name=AdGuard%20Popup%20Blocker&amp;type=user-script"></script>
+</head>
+<style>
+    * {
+        font-family: 'Source Serif Pro', serif;
+    }
+
+    #navbar ul {
+        align-self: center;
+        align-items: center;
+        list-style: none;
+        display: inline-block;
+        background-color: #ffc79d;
+        border: #ff8f39 1px solid;
+        overflow: hidden;
+        border-radius: 10px;
+        margin: 30px;
+    }
+
+    #navbar ul li {
+        float: left;
+        padding: 20px 10px;
+
+    }
+
+    #navbar ul li a {
+        font-size: 18px;
+        font-weight: bold;
+        text-decoration: none;
+        color: #a14600;
+
+    }
+
+    #navbar ul li:hover {
+        background-color: #ff9f55;
+
+    }
+
+    #navbar ul li a:hover {
+        color: white;
+
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+    .example {
+        background-color: #f7d0aa;
+        padding: 10px 0px;
+        block-size: auto;
+
+    }
+
+    .Example {
+        background-color: #e4e44e;
+        padding: 1px 1px;
+
+    }
+
+    .examplePresent {
+        background-color: #ffffff;
+        padding: 10px 6px;
+
+    }
+
+    .MainHeading {
+        font-size: 64px;
+    }
+
+    .heading {
+        padding: 7px;
+        background-color: #db9553;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .Tables {
+        padding: 5px 15px;
+        font-size: large;
+        align-self: center;
+        align-items: center;
+        background-color: #fcbb7d;
+        display: inline-block;
+
+    }
+
+    body {
+        align-items: center;
+        background-color: #f3d5b9;
+        color: rgb(72, 52, 10);
+    }
+</style>
+
+<body align="center">
+    <div class="mainHeading" align="center">
+        <h1>Tables&nbsp; in &nbsp;HTML</h1>
+    </div>
+
+    <div align="center">
+        <h1 class="heading">Tables</h1>
+    </div>
+    <div class="Tables">
+        <p>
+            As normal tables , Tables in HTML also consists of rows and column<br>
+            A table starts with the &#60 table &#62 and ends with &#60 / table &#62<br>
+            We can define Rows and column in the table and the number of these Rows and Column is programable<br>
+            to define a row &#60 tr &#62 &#60 / tr &#62 these tags are used , " tr " stands for Table Row<br>
+            to define a Column &#60 td &#62 &#60 / td &#62 these tags are used , " td " stands for table data <br>
+            to define the header of the table or the field of the table the &#60 th &#62 &#60 / th &#62 tags are
+            used , th stands for table header<br>
+        </p>
+        <h2>
+            Example
+        </h2>
+        &#60table border="1" align=center&#62<br>
+        &#60tr&#62<br>
+        &#60th&#62&nbsp;&nbsp;First Row&nbsp;&nbsp;&#60/th&#62<br>
+        &#60th&#62&nbsp;&nbsp;Second Row&nbsp;&nbsp;&#60/th&#62<br>
+        &#60th&#62&nbsp;&nbsp;Third Row&nbsp;&nbsp;&#60/th&#62<br>
+        &#60/tr&#62<br>
+        &#60tr&#62<br>
+        &#60td&#62&nbsp;&nbsp;First Row , First Column&nbsp;&nbsp;&#60/td&#62<br>
+        &#60td&#62&nbsp;&nbsp;Second Row , Frist Column&nbsp;&nbsp;&#60/td&#62<br>
+        &#60td&#62&nbsp;&nbsp;Third Row , Frist Column&nbsp;&nbsp;&#60/td&#62<br>
+        &#60/tr&#62<br>
+        &#60tr&#62<br>
+        &#60td&#62&nbsp;&nbsp;First Row , Second Column&nbsp;&nbsp;&#60/td&#62<br>
+        &#60td&#62&nbsp;&nbsp;Second Row , Second Column&nbsp;&nbsp;&#60/td&#62<br>
+        &#60td&#62&nbsp;&nbsp;Third Row , Second Column&nbsp;&nbsp;&#60/td&#62<br>
+        &#60/tr&#62<br>
+        &#60/table&#62
+        <h3>
+            Will display the folowing table<br><br>
+        </h3>
+    </div>
+    <br>
+    <table border="1" align=center>
+        <tr>
+            <th>&nbsp;&nbsp;First Row&nbsp;&nbsp;</th>
+            <th>&nbsp;&nbsp;Second Row&nbsp;&nbsp;</th>
+            <th>&nbsp;&nbsp;Third Row&nbsp;&nbsp;</th>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;First Row , First Column&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;Second Row , Frist Column&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;Third Row , Frist Column&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;First Row , Second Column&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;Second Row , Second Column&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;Third Row , Second Column&nbsp;&nbsp;</td>
+        </tr>
+    </table>
+    <nav id="navbar">
+        <ul>
+            <li><a href="./page1.html">Html and CSS</a></li>
+            <li><a href="./index.html">Profile</a></li>
+            <li><a href="./page3.html">Multimedia in HTML</a></li>
+            <li><a href="./page4.html">Form Inputs in HTML</a></li>
+        </ul>
+    </nav>
+</body>
+
+</html>

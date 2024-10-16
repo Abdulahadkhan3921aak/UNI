@@ -1,0 +1,19 @@
+# ninja log v5
+18	394	7078684885822078	E:/Assignments/Projects/OOP/build-ProjectQT-Desktop_Qt_6_5_1_MinGW_64_bit-Debug/ProjectQT_autogen/timestamp	6f4609e91b474a5e
+18	394	7078684885822078	ProjectQT_autogen/timestamp	6f4609e91b474a5e
+3970	26900	7077654140507289	CMakeFiles/ProjectQT.dir/main.cpp.obj	78f26336ffd06a25
+729	6781	7077658758710005	CMakeFiles/ProjectQT.dir/mainwindow.cpp.obj	4f006d5c3d3ae7a
+18	394	7078684885822078	ProjectQT_autogen/mocs_compilation.cpp	6f4609e91b474a5e
+18	394	7078684885822078	E:/Assignments/Projects/OOP/build-ProjectQT-Desktop_Qt_6_5_1_MinGW_64_bit-Debug/ProjectQT_autogen/mocs_compilation.cpp	6f4609e91b474a5e
+3975	26835	7077654140663490	CMakeFiles/ProjectQT.dir/ProjectQT_autogen/mocs_compilation.cpp.obj	b35cd925bf39e31c
+3992	26904	7077654141444556	CMakeFiles/ProjectQT.dir/phonebook.cpp.obj	bceb225d6e863d2e
+545	5880	7075256438162828	CMakeFiles/ProjectQT.dir/sql.cpp.obj	db43633ac49e9e86
+0	100	0	CMakeFiles/clean.additional	26ab82f82478fbc9
+101	163	0	clean	fa92303e789e5432
+546	2176	7078681917840519	Phonebook.exe	ccd0c7bfe1f6170d
+2	1373	7078686747584281	build.ninja	85c0a11ef2cf715d
+52	720	7078686749860329	ProjectQT_autogen/timestamp	6f4609e91b474a5e
+52	720	7078686749860329	ProjectQT_autogen/mocs_compilation.cpp	6f4609e91b474a5e
+52	720	7078686749860329	E:/Assignments/Projects/OOP/build-ProjectQT-Desktop_Qt_6_5_1_MinGW_64_bit-Debug/ProjectQT_autogen/timestamp	6f4609e91b474a5e
+52	720	7078686749860329	E:/Assignments/Projects/OOP/build-ProjectQT-Desktop_Qt_6_5_1_MinGW_64_bit-Debug/ProjectQT_autogen/mocs_compilation.cpp	6f4609e91b474a5e
+729	2542	7078686767996054	Phonebook.exe	7aefdcd4aaf1a55a
