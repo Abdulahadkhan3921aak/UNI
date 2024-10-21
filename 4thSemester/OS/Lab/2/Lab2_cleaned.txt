@@ -1,0 +1,78 @@
+Script started on 2024-10-17 00:12:42+05:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="120" LINES="30"]
+whitedevil@PC: /mnt/f/My_Private_Folder/UNI/4thSemester/OS/Lab/2
+whitedevil@PC:/mnt/f/My_Private_Folder/UNI/4thSemester/OS/Lab/2$ cd ~
+whitedevil@PC: ~
+whitedevil@PC:~$ pwd
+/home/whitedevil
+whitedevil@PC: ~
+whitedevil@PC:~$ mkdir adir
+whitedevil@PC: ~
+whitedevil@PC:~$ ls
+adir  ansifilter-master  ansifilter-master.tar.gz  dir
+whitedevil@PC: ~
+whitedevil@PC:~$ 
+whitedevil@PC: ~
+whitedevil@PC:~$ cd adir
+whitedevil@PC: ~/adir
+whitedevil@PC:~/adir$ pwd
+/home/whitedevil/adir
+whitedevil@PC: ~/adir
+whitedevil@PC:~/adir$ touch testfile
+whitedevil@PC: ~/adir
+whitedevil@PC:~/adir$ ls
+testfile
+whitedevil@PC: ~/adir
+whitedevil@PC:~/adir$ cat testfile
+whitedevil@PC: ~/adir
+whitedevil@PC:~/adir$ cp testfile secondfile
+whitedevil@PC: ~/adir
+whitedevil@PC:~/adir$ ls
+secondfile  testfile
+whitedevil@PC: ~/adir
+whitedevil@PC:~/adir$ cat testfile secondfile
+whitedevil@PC: ~/adir
+whitedevil@PC:~/adir$ rm testfile
+whitedevil@PC: ~/adir
+whitedevil@PC:~/adir$ ls
+secondfile
+whitedevil@PC: ~/adir
+whitedevil@PC:~/adir$ clear
+whitedevil@PC: ~/adir
+whitedevil@PC:~/adir$ mv secondfile thefile
+whitedevil@PC: ~/adir
+whitedevil@PC:~/adir$ cp thefile ~/
+whitedevil@PC: ~/adir
+whitedevil@PC:~/adir$ rm thefile
+whitedevil@PC: ~/adir
+whitedevil@PC:~/adir$ ls
+whitedevil@PC: ~/adir
+whitedevil@PC:~/adir$ cp ~/thefile .
+whitedevil@PC: ~/adir
+whitedevil@PC:~/adir$ ls
+thefile
+whitedevil@PC: ~/adir
+whitedevil@PC:~/adir$ cd ~
+whitedevil@PC: ~
+whitedevil@PC:~$ pwd
+/home/whitedevil
+whitedevil@PC: ~
+whitedevil@PC:~$ ls
+adir  ansifilter-master  ansifilter-master.tar.gz  dir  thefile
+whitedevil@PC: ~
+whitedevil@PC:~$ rm thefile
+whitedevil@PC: ~
+whitedevil@PC:~$ cd adir
+whitedevil@PC: ~/adir
+whitedevil@PC:~/adir$ rm thefile
+whitedevil@PC: ~/adir
+whitedevil@PC:~/adir$ cd ..
+whitedevil@PC: ~
+whitedevil@PC:~$ rmdir adir
+whitedevil@PC: ~
+whitedevil@PC:~$ ls
+ansifilter-master  ansifilter-master.tar.gz  dir
+whitedevil@PC: ~
+whitedevil@PC:~$ exit
+exit
+
+Script done on 2024-10-17 00:14:49+05:00 [COMMAND_EXIT_CODE="0"]

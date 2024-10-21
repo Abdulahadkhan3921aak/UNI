@@ -1,0 +1,52 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\MyFiles\\My_Privater_Folder\\UNI\\4th Semester\\COAL\\Lab\\Project(32bit)\\Project\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B89D2E3A-4FA0-4B55-9562-B5F033159CC5}|Project.vcxproj|C:\\MyFiles\\My_Privater_Folder\\UNI\\4th Semester\\COAL\\Lab\\Project(32bit)\\Project\\Main.asm||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{B89D2E3A-4FA0-4B55-9562-B5F033159CC5}|Project.vcxproj|solutionrelative:Main.asm||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Microsoft\\VC\\v170\\BuildCustomizations\\masm.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "masm.targets",
+              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Microsoft\\VC\\v170\\BuildCustomizations\\masm.targets",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Microsoft\\VC\\v170\\BuildCustomizations\\masm.targets",
+              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Microsoft\\VC\\v170\\BuildCustomizations\\masm.targets",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Microsoft\\VC\\v170\\BuildCustomizations\\masm.targets",
+              "ViewState": "AQIAADEAAAAAAAAAAAAmwEUAAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
+              "WhenOpened": "2024-06-02T12:42:37.951Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Main.asm",
+              "DocumentMoniker": "C:\\MyFiles\\My_Privater_Folder\\UNI\\4th Semester\\COAL\\Lab\\Project(32bit)\\Project\\Main.asm",
+              "RelativeDocumentMoniker": "Main.asm",
+              "ToolTip": "C:\\MyFiles\\My_Privater_Folder\\UNI\\4th Semester\\COAL\\Lab\\Project(32bit)\\Project\\Main.asm",
+              "RelativeToolTip": "Main.asm",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAIIAAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-06-02T12:24:20.382Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

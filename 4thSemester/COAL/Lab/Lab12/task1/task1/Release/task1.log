@@ -1,0 +1,4 @@
+﻿  Assembling Main.asm...
+Main.asm(107): warning A6004: procedure argument or local not referenced : regValue
+  LINK : /LTCG specified but no code generation required; remove /LTCG from the link command line to improve linker performance
+  task1.vcxproj -> C:\MyFiles\My_Privater_Folder\UNI\4th Semester\COAL\Lab\Lab12\task1\Release\task1.exe

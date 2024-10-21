@@ -1,0 +1,33 @@
+﻿  Assembling Main.asm...
+Main.asm(179): error A2070: invalid instruction operands
+Main.asm(186): error A2070: invalid instruction operands
+Main.asm(188): error A2070: invalid instruction operands
+Main.asm(191): error A2070: invalid instruction operands
+Main.asm(193): error A2070: invalid instruction operands
+Main.asm(196): error A2070: invalid instruction operands
+Main.asm(198): error A2070: invalid instruction operands
+Main.asm(202): error A2070: invalid instruction operands
+Main.asm(204): error A2070: invalid instruction operands
+Main.asm(207): error A2070: invalid instruction operands
+Main.asm(209): error A2070: invalid instruction operands
+Main.asm(212): error A2070: invalid instruction operands
+Main.asm(214): error A2070: invalid instruction operands
+Main.asm(218): error A2070: invalid instruction operands
+Main.asm(220): error A2070: invalid instruction operands
+Main.asm(223): error A2070: invalid instruction operands
+Main.asm(225): error A2070: invalid instruction operands
+Main.asm(238): error A2070: invalid instruction operands
+Main.asm(240): error A2070: invalid instruction operands
+Main.asm(243): error A2070: invalid instruction operands
+Main.asm(270): error A2070: invalid instruction operands
+Main.asm(352): error A2070: invalid instruction operands
+Main.asm(118): error A2022: instruction operands must be the same size
+Main.asm(260): error A2032: invalid use of register
+Main.asm(265): error A2022: instruction operands must be the same size
+Main.asm(279): error A2032: invalid use of register
+Main.asm(288): error A2032: invalid use of register
+Main.asm(309): error A2032: invalid use of register
+Main.asm(318): error A2032: invalid use of register
+Main.asm(347): error A2032: invalid use of register
+Main.asm(356): error A2032: invalid use of register
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\BuildCustomizations\masm.targets(70,5): error MSB3721: The command "ml.exe /c /nologo /safeseh /Zi /Fo"Project\Release\Main.obj" /Fl"Project\Release\Project.lst" /W3 /errorReport:prompt  /TaMain.asm" exited with code 1.

@@ -1,0 +1,270 @@
+Microsoft (R) Macro Assembler Version 14.40.33808.0	    05/29/24 23:29:15
+Main.asm						     Page 1 - 1
+
+
+				.386
+				.model flat, stdcall
+				.stack 4096
+
+				ExitProcess PROTO, dwExitCode:DWORD
+				WriteConsoleA PROTO, hConsoleOutput:DWORD, lpBuffer:PTR BYTE, nNumberOfCharsToWrite:DWORD, lpNumberOfCharsWritten:PTR DWORD, lpReserved:DWORD
+				ReadConsoleA PROTO, hConsoleInput:DWORD, lpBuffer:PTR BYTE, nNumberOfCharsToRead:DWORD, lpNumberOfCharsRead:PTR DWORD, lpReserved:DWORD
+				GetStdHandle PROTO, nStdHandle:DWORD
+
+ =-0000000B			STD_OUTPUT_HANDLE equ -11
+ =-0000000A			STD_INPUT_HANDLE equ -10
+
+ 00000000			.data
+ 00000000 00000002		myList DWORD 2, 3, 5, 8
+	   00000003
+	   00000005
+	   00000008
+ 00000010 48 65 6C 6C 6F	sometext BYTE "Hello, World!", 0
+	   2C 20 57 6F 72
+	   6C 64 21 00
+ 0000001E 00			singleChar BYTE ?
+ 0000001F  00000080 [		inputBuffer BYTE 128 dup(?)
+	    00
+	   ]
+ 0000009F  00000080 [		outputBuffer BYTE 128 dup(?)
+	    00
+	   ]
+ 0000011F 00000000		hConsoleOutput DWORD ?
+ 00000123 00000000		hConsoleInput DWORD ?
+ 00000127 00000000		charsWritten DWORD ?
+ 0000012B 00000000		charsRead DWORD ?
+
+ 0000012F 00			number1 BYTE ?
+ 00000130 00			number2 BYTE ?
+ 00000131 00			sum BYTE 0
+
+ 00000000			.code
+ 00000000			stdOut PROC uses ebx ecx edx, pText:PTR BYTE
+				    invoke GetStdHandle, STD_OUTPUT_HANDLE
+ 0000000D  A3 0000011F R	    mov hConsoleOutput, eax
+
+ 00000012  8B 4D 08		    mov ecx, pText
+ 00000015  BA 00000000		    mov edx, 0
+				    ; Find length of string
+ 0000001A			    find_length:
+ 0000001A  8A 04 11		        mov al, BYTE PTR [ecx+edx]
+ 0000001D  3C 00		        cmp al, 0
+ 0000001F  74 03		        je length_found
+ 00000021  42			        inc edx
+ 00000022  EB F6		        jmp find_length
+ 00000024			    length_found:
+
+				    invoke WriteConsoleA, hConsoleOutput, pText, edx, addr charsWritten, 0
+				    ret
+ 00000041			stdOut ENDP
+
+ 00000041			printChar PROC uses eax edx, pChar:PTR BYTE
+				    invoke GetStdHandle, STD_OUTPUT_HANDLE
+ 0000004D  A3 0000011F R	    mov hConsoleOutput, eax
+
+ 00000052  BA 00000001		    mov edx, 1
+				    invoke WriteConsoleA, hConsoleOutput, pChar, edx, addr charsWritten, 0
+				    ret
+ 00000073			printChar ENDP
+
+ 00000073			readChar PROC uses eax edx, pChar:PTR BYTE
+				    invoke GetStdHandle, STD_INPUT_HANDLE
+ 0000007F  A3 00000123 R	    mov hConsoleInput, eax
+
+				    invoke ReadConsoleA, hConsoleInput, pChar, 3, addr charsRead, 0
+				    ret
+ 000000A1			readChar ENDP
+
+ 000000A1			readLine PROC uses eax edx, pBuffer:PTR BYTE
+				    invoke GetStdHandle, STD_INPUT_HANDLE
+ 000000AD  A3 00000123 R	    mov hConsoleInput, eax
+
+				    invoke ReadConsoleA, hConsoleInput, pBuffer, 128, addr charsRead, 0
+				    ; Replace the CRLF with null terminator
+ 000000CC  A1 0000012B R	    mov eax, charsRead
+ 000000D1  48			    dec eax
+ 000000D2  C6 44 05 07 00	    mov BYTE PTR [pBuffer+eax-1], 0
+				    ret
+ 000000DD			readLine ENDP
+
+				; Procedure to convert a DWORD to string
+ 000000DD			dwtoa PROC uses eax ebx ecx edx, value:DWORD, pBuffer:PTR BYTE
+ 000000E4  8B 45 08		    mov eax, value
+ 000000E7  B9 0000000A		    mov ecx, 10
+ 000000EC  8D 9D 0000008C	    lea ebx, [pBuffer+128] ; End of buffer
+ 000000F2  C6 03 00		    mov BYTE PTR [ebx], 0 ; Null-terminate the string
+ 000000F5  4B			    dec ebx
+ 000000F6			convert_loop:
+ 000000F6  33 D2		    xor edx, edx
+ 000000F8  F7 F1		    div ecx
+ 000000FA  80 C2 30		    add dl, '0'
+ 000000FD  88 13		    mov BYTE PTR [ebx], dl
+ 000000FF  4B			    dec ebx
+ 00000100  85 C0		    test eax, eax
+ 00000102  75 F2		    jnz convert_loop
+ 00000104  43			    inc ebx
+				    ret
+ 0000010D			dwtoa ENDP
+
+ 0000010D			printReg PROC uses eax edx, regValue:DWORD
+ 00000112  8D 15 0000009F R	    lea edx, outputBuffer
+				    invoke dwtoa, regValue, edx
+				    invoke stdOut, edx
+				    ret
+ 0000012D			printReg ENDP
+
+ 0000012D			printVal PROC uses eax edx, regValue:DWORD
+ 00000132  8D 15 0000009F R	    lea edx, outputBuffer
+				    invoke stdOut, edx
+				    ret
+ 00000144			printVal ENDP
+Main.asm(107) : warning A6004:procedure argument or local not referenced : regValue
+
+ 00000144			main PROC
+				    
+				    ;; this is task 1
+				    ;
+				    ;; Print whole text
+				    ;;invoke stdOut, addr sometext
+				    ;  
+				    ;; this is task 2
+				    ;
+				    ;; Read a line of input from the user
+				    ;invoke readLine, addr inputBuffer
+				    ;; Print the line of input
+				    ;invoke stdOut, addr inputBuffer
+				    
+				    
+				    
+				    ; this is task 3
+
+
+				    invoke readChar , addr number1
+				    invoke readChar , addr number2
+ 00000158  80 2D 0000012F R	    sub number1 , '0'
+	   30
+ 0000015F  80 2D 00000130 R	    sub number2 , '0'
+	   30
+ 00000166  BB 00000000		    mov ebx , 0
+ 0000016B  8A 3D 0000012F R	    mov bh , number1
+ 00000171  02 3D 00000130 R	    add bh , number2
+ 00000177  80 FF 0A		    cmp bh , 10
+ 0000017A  7C 44		    jl printbh
+ 0000017C  8A DF		    mov bl , bh
+ 0000017E  80 EF 0A		    sub bh , 10
+ 00000181  80 FF 00		    cmp bh , 0
+ 00000184  7C 32		    jl set_bhToZero
+ 00000186			    bl_digit:
+ 00000186  2A DF		    sub bl , bh
+ 00000188  80 EB 09		    sub bl , 9
+ 0000018B  80 FB 00		    cmp bl , 0
+ 0000018E  7C 2C		    jl set_blToZero
+ 00000190			    afterbl:
+ 00000190  80 C7 30		    add bh , '0'
+ 00000193  80 C3 30		    add bl , '0'
+ 00000196  88 3D 0000012F R	    mov number1 , bh
+ 0000019C  88 1D 00000130 R	    mov number2 , bl
+				    invoke printChar , addr number2
+				    invoke printChar , addr number1
+ 000001B6  EB 1B		    jmp quit
+				    
+				    
+ 000001B8			    set_bhToZero:
+ 000001B8  B7 00		    mov bh , 0
+ 000001BA  EB CA		    jmp bl_digit
+				    
+ 000001BC			    set_blToZero:
+ 000001BC  B3 00		    mov bl , 0
+ 000001BE  EB D0		    jmp afterbl
+				    
+ 000001C0			    printbh:
+ 000001C0  80 C7 30		    add bh , '0'
+ 000001C3  88 3D 00000131 R	    mov sum , bh
+				    invoke printChar , addr sum
+				    
+ 000001D3			    quit:
+				    invoke ExitProcess, 0
+ 000001DA			main ENDP
+
+				END main
+Microsoft (R) Macro Assembler Version 14.40.33808.0	    05/29/24 23:29:15
+Main.asm						     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+FLAT . . . . . . . . . . . . . .	GROUP
+STACK  . . . . . . . . . . . . .	32 Bit	 00001000 DWord	  Stack	  'STACK'	 
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000132 DWord	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 000001DA DWord	  Public  'CODE'	
+
+
+Procedures, parameters, and locals:
+
+                N a m e                 Type     Value    Attr
+
+ExitProcess  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
+GetStdHandle . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
+ReadConsoleA . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
+WriteConsoleA  . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
+dwtoa  . . . . . . . . . . . . .	P Near	 000000DD _TEXT	Length= 00000030 Public STDCALL
+  value  . . . . . . . . . . . .	DWord	 bp + 00000008
+  pBuffer  . . . . . . . . . . .	DWord	 bp + 0000000C
+  convert_loop . . . . . . . . .	L Near	 000000F6 _TEXT	
+main . . . . . . . . . . . . . .	P Near	 00000144 _TEXT	Length= 00000096 Public STDCALL
+  bl_digit . . . . . . . . . . .	L Near	 00000186 _TEXT	
+  afterbl  . . . . . . . . . . .	L Near	 00000190 _TEXT	
+  set_bhToZero . . . . . . . . .	L Near	 000001B8 _TEXT	
+  set_blToZero . . . . . . . . .	L Near	 000001BC _TEXT	
+  printbh  . . . . . . . . . . .	L Near	 000001C0 _TEXT	
+  quit . . . . . . . . . . . . .	L Near	 000001D3 _TEXT	
+printChar  . . . . . . . . . . .	P Near	 00000041 _TEXT	Length= 00000032 Public STDCALL
+  pChar  . . . . . . . . . . . .	DWord	 bp + 00000008
+printReg . . . . . . . . . . . .	P Near	 0000010D _TEXT	Length= 00000020 Public STDCALL
+  regValue . . . . . . . . . . .	DWord	 bp + 00000008
+printVal . . . . . . . . . . . .	P Near	 0000012D _TEXT	Length= 00000017 Public STDCALL
+  regValue . . . . . . . . . . .	DWord	 bp + 00000008
+readChar . . . . . . . . . . . .	P Near	 00000073 _TEXT	Length= 0000002E Public STDCALL
+  pChar  . . . . . . . . . . . .	DWord	 bp + 00000008
+readLine . . . . . . . . . . . .	P Near	 000000A1 _TEXT	Length= 0000003C Public STDCALL
+  pBuffer  . . . . . . . . . . .	DWord	 bp + 00000008
+stdOut . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000041 Public STDCALL
+  pText  . . . . . . . . . . . .	DWord	 bp + 00000008
+  find_length  . . . . . . . . .	L Near	 0000001A _TEXT	
+  length_found . . . . . . . . .	L Near	 00000024 _TEXT	
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 00000000h   
+@DataSize  . . . . . . . . . . .	Number	 00000000h   
+@Interface . . . . . . . . . . .	Number	 00000003h   
+@Model . . . . . . . . . . . . .	Number	 00000007h   
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 FLAT
+@fardata?  . . . . . . . . . . .	Text   	 FLAT
+@fardata . . . . . . . . . . . .	Text   	 FLAT
+@stack . . . . . . . . . . . . .	Text   	 FLAT
+STD_INPUT_HANDLE . . . . . . . .	Number	 -0000000Ah   
+STD_OUTPUT_HANDLE  . . . . . . .	Number	 -0000000Bh   
+charsRead  . . . . . . . . . . .	DWord	 0000012B _DATA	
+charsWritten . . . . . . . . . .	DWord	 00000127 _DATA	
+hConsoleInput  . . . . . . . . .	DWord	 00000123 _DATA	
+hConsoleOutput . . . . . . . . .	DWord	 0000011F _DATA	
+inputBuffer  . . . . . . . . . .	Byte	 0000001F _DATA	
+myList . . . . . . . . . . . . .	DWord	 00000000 _DATA	
+number1  . . . . . . . . . . . .	Byte	 0000012F _DATA	
+number2  . . . . . . . . . . . .	Byte	 00000130 _DATA	
+outputBuffer . . . . . . . . . .	Byte	 0000009F _DATA	
+singleChar . . . . . . . . . . .	Byte	 0000001E _DATA	
+sometext . . . . . . . . . . . .	Byte	 00000010 _DATA	
+sum  . . . . . . . . . . . . . .	Byte	 00000131 _DATA	
+
+	   1 Warnings
+	   0 Errors

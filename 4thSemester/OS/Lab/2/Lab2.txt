@@ -1,0 +1,46 @@
+Script started on 2024-10-17 00:12:42+05:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="120" LINES="30"]
+]0;whitedevil@PC: /mnt/f/My_Private_Folder/UNI/4thSemester/OS/Lab/2[01;32mwhitedevil@PC[00m:[01;34m/mnt/f/My_Private_Folder/UNI/4thSemester/OS/Lab/2[00m$ cd ~
+]0;whitedevil@PC: ~[01;32mwhitedevil@PC[00m:[01;34m~[00m$ pwd
+/home/whitedevil
+]0;whitedevil@PC: ~[01;32mwhitedevil@PC[00m:[01;34m~[00m$ mkdir adir
+]0;whitedevil@PC: ~[01;32mwhitedevil@PC[00m:[01;34m~[00m$ ls
+[0m[01;34madir[0m  [01;34mansifilter-master[0m  [01;31mansifilter-master.tar.gz[0m  [01;34mdir[0m
+]0;whitedevil@PC: ~[01;32mwhitedevil@PC[00m:[01;34m~[00m$ 
+]0;whitedevil@PC: ~[01;32mwhitedevil@PC[00m:[01;34m~[00m$ cd adir
+]0;whitedevil@PC: ~/adir[01;32mwhitedevil@PC[00m:[01;34m~/adir[00m$ pwd
+/home/whitedevil/adir
+]0;whitedevil@PC: ~/adir[01;32mwhitedevil@PC[00m:[01;34m~/adir[00m$ touch testfile
+]0;whitedevil@PC: ~/adir[01;32mwhitedevil@PC[00m:[01;34m~/adir[00m$ ls
+testfile
+]0;whitedevil@PC: ~/adir[01;32mwhitedevil@PC[00m:[01;34m~/adir[00m$ cat testfile
+]0;whitedevil@PC: ~/adir[01;32mwhitedevil@PC[00m:[01;34m~/adir[00m$ cp testfile secondfile
+]0;whitedevil@PC: ~/adir[01;32mwhitedevil@PC[00m:[01;34m~/adir[00m$ ls
+secondfile  testfile
+]0;whitedevil@PC: ~/adir[01;32mwhitedevil@PC[00m:[01;34m~/adir[00m$ cat testfile secondfile
+]0;whitedevil@PC: ~/adir[01;32mwhitedevil@PC[00m:[01;34m~/adir[00m$ rm testfile
+]0;whitedevil@PC: ~/adir[01;32mwhitedevil@PC[00m:[01;34m~/adir[00m$ ls
+secondfile
+]0;whitedevil@PC: ~/adir[01;32mwhitedevil@PC[00m:[01;34m~/adir[00m$ clear
+[H[2J[3J]0;whitedevil@PC: ~/adir[01;32mwhitedevil@PC[00m:[01;34m~/adir[00m$ mv secondfile thefile
+]0;whitedevil@PC: ~/adir[01;32mwhitedevil@PC[00m:[01;34m~/adir[00m$ cp thefile ~/
+]0;whitedevil@PC: ~/adir[01;32mwhitedevil@PC[00m:[01;34m~/adir[00m$ rm thefile
+]0;whitedevil@PC: ~/adir[01;32mwhitedevil@PC[00m:[01;34m~/adir[00m$ ls
+]0;whitedevil@PC: ~/adir[01;32mwhitedevil@PC[00m:[01;34m~/adir[00m$ cp ~/thefile .
+]0;whitedevil@PC: ~/adir[01;32mwhitedevil@PC[00m:[01;34m~/adir[00m$ ls
+thefile
+]0;whitedevil@PC: ~/adir[01;32mwhitedevil@PC[00m:[01;34m~/adir[00m$ cd ~
+]0;whitedevil@PC: ~[01;32mwhitedevil@PC[00m:[01;34m~[00m$ pwd
+/home/whitedevil
+]0;whitedevil@PC: ~[01;32mwhitedevil@PC[00m:[01;34m~[00m$ ls
+[0m[01;34madir[0m  [01;34mansifilter-master[0m  [01;31mansifilter-master.tar.gz[0m  [01;34mdir[0m  thefile
+]0;whitedevil@PC: ~[01;32mwhitedevil@PC[00m:[01;34m~[00m$ rm thefile
+]0;whitedevil@PC: ~[01;32mwhitedevil@PC[00m:[01;34m~[00m$ cd adir
+]0;whitedevil@PC: ~/adir[01;32mwhitedevil@PC[00m:[01;34m~/adir[00m$ rm thefile
+]0;whitedevil@PC: ~/adir[01;32mwhitedevil@PC[00m:[01;34m~/adir[00m$ cd ..
+]0;whitedevil@PC: ~[01;32mwhitedevil@PC[00m:[01;34m~[00m$ rmdir adir
+]0;whitedevil@PC: ~[01;32mwhitedevil@PC[00m:[01;34m~[00m$ ls
+[0m[01;34mansifilter-master[0m  [01;31mansifilter-master.tar.gz[0m  [01;34mdir[0m
+]0;whitedevil@PC: ~[01;32mwhitedevil@PC[00m:[01;34m~[00m$ exit
+exit
+
+Script done on 2024-10-17 00:14:49+05:00 [COMMAND_EXIT_CODE="0"]

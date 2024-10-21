@@ -1,0 +1,160 @@
+Microsoft (R) Macro Assembler (x64) Version 14.40.33808.0   06/04/24 22:47:37
+Main.asm						     Page 1 - 1
+
+
+				.model flat
+Main.asm(1) : error A2008:syntax error : .
+				.stack 100h
+Main.asm(2) : error A2008:syntax error : .
+ 00000000			.data
+ 00000000 31 32 33 34 35	board DB '1','2','3','4','5','6','7','8','9','$'
+	   36 37 38 39 24
+ 0000000A 58			player DB 'X'
+ 0000000B 45 6E 74 65 72	message DB 'Enter a number (1-9): $',0
+	   20 61 20 6E 75
+	   6D 62 65 72 20
+	   28 31 2D 39 29
+	   3A 20 24 00
+ 00000023 0D 0A 24		newline DB 13,10,'$'
+ 00000026 50 6C 61 79 65	win_message DB 'Player X wins!$'
+	   72 20 58 20 77
+	   69 6E 73 21 24
+
+ 00000000			.CODE
+ 00000000			main PROC
+				    ; Initialize data segment
+				    MOV AX, @DATA
+Main.asm(13) : error A2006:undefined symbol : @DATA
+ 00000000  66| 8E D8		    MOV DS, AX
+
+				    ; Main game loop
+ 0000000E			game_loop:
+ 0000000E  E8 0000002B		    CALL display_board
+ 00000013  E8 00000052		    CALL get_input
+ 00000018  E8 00000086		    CALL check_win
+				    ; Switch player
+ 0000001D  80 3D 0000000A R	    CMP player, 'X'
+	   58
+ 00000024  75 09		    JNE switch_to_x
+ 00000026  C6 05 0000000A R	    MOV player, 'O'
+	   4F
+ 0000002D  EB DF		    JMP game_loop
+ 0000002F			switch_to_x:
+ 0000002F  C6 05 0000000A R	    MOV player, 'X'
+	   58
+ 00000036  EB D6		    JMP game_loop
+
+				    ; Exit program
+ 00000038  66| B8 4C00		    MOV AX, 4C00h
+ 0000003C  CD 21		    INT 21h
+ 0000003E			main ENDP
+
+ 0000003E			display_board PROC
+				    MOV SI, OFFSET board
+Main.asm(36) : error A2024:invalid operand size for instruction
+
+				    ; Display the board in 3x3 format
+ 0000003E  66| B9 0003		    MOV CX, 3
+ 0000004D			    PRINT_ROW:
+ 0000004D  66| 8B D6		        MOV DX, SI
+ 00000050  B4 09		        MOV AH, 09h
+ 00000052  CD 21		        INT 21h
+ 00000054  66| 83 C6 01		        ADD SI, 1
+				        MOV DX, OFFSET newline
+Main.asm(45) : error A2024:invalid operand size for instruction
+ 00000058  B4 09		        MOV AH, 09h
+ 0000005A  CD 21		        INT 21h
+ 0000005C  E2 EF		        LOOP PRINT_ROW
+
+ 0000005E  C3			    RET
+ 0000005F			display_board ENDP
+
+ 0000005F			get_input PROC
+				    MOV DX, OFFSET message
+Main.asm(54) : error A2024:invalid operand size for instruction
+ 0000005F  B4 09		    MOV AH, 09h
+ 00000061  CD 21		    INT 21h
+
+ 00000063  B4 01		    MOV AH, 01h
+ 00000065  CD 21		    INT 21h
+ 00000067  2C 30		    SUB AL, '0'   ; Convert ASCII to integer
+ 00000069  8A D8		    MOV BL, AL
+ 0000006B  FE CB		    DEC BL        ; Convert 1-9 to 0-8
+				    MOV SI, OFFSET board
+Main.asm(63) : error A2024:invalid operand size for instruction
+ 0000006D  66| 03 F3		    ADD SI, BX
+
+ 00000070  8A 05 0000000A R	    MOV AL, player
+				    MOV [SI], AL
+Main.asm(67) : error A2031:must be index or base register
+
+ 00000076  C3			    RET
+ 00000077			get_input ENDP
+
+ 00000077			check_win PROC
+				    ; Check rows, columns, and diagonals for a win
+				    ; Example for rows:
+				    MOV SI, OFFSET board
+Main.asm(75) : error A2024:invalid operand size for instruction
+ 00000077  66| B9 0003		    MOV CX, 3
+ 000000B2			    CHECK_ROW:
+				        MOV AL, [SI]
+Main.asm(78) : error A2031:must be index or base register
+				        CMP AL, [SI+1]
+Main.asm(79) : error A2031:must be index or base register
+ 000000B2  75 3E		        JNE NEXT_ROW
+				        CMP AL, [SI+2]
+Main.asm(81) : error A2031:must be index or base register
+ 000000B4  75 3C		        JNE NEXT_ROW
+				        ; If all three are the same
+				        MOV DX, OFFSET win_message
+Main.asm(84) : error A2024:invalid operand size for instruction
+ 000000B6  B4 09		        MOV AH, 09h
+ 000000B8  CD 21		        INT 21h
+ 000000BA  66| B8 4C00		        MOV AX, 4C00h
+ 000000BE  CD 21		        INT 21h
+ 000000F2			    NEXT_ROW:
+ 000000F2  66| 83 C6 03		        ADD SI, 3
+ 000000F6  E2 BA		        LOOP CHECK_ROW
+
+				    ; Check columns and diagonals similarly...
+
+ 000000F8  C3			    RET
+ 000000F9			check_win ENDP
+
+				END main
+Main.asm(98) : error A2008:syntax error : main
+Main.asm(98) : error A2088:END directive required at end of file
+Microsoft (R) Macro Assembler (x64) Version 14.40.33808.0   06/04/24 22:47:37
+Main.asm						     Symbols 2 - 1
+
+
+
+
+Procedures, parameters, and locals:
+
+                N a m e                 Type     Value    Attr
+
+check_win  . . . . . . . . . . .	P 	 000000A3 _TEXT	Length= 00000056 Public
+  CHECK_ROW  . . . . . . . . . .	L 	 000000B2 _TEXT	
+  NEXT_ROW . . . . . . . . . . .	L 	 000000F2 _TEXT	
+display_board  . . . . . . . . .	P 	 0000003E _TEXT	Length= 0000002C Public
+  PRINT_ROW  . . . . . . . . . .	L 	 0000004D _TEXT	
+get_input  . . . . . . . . . . .	P 	 0000006A _TEXT	Length= 00000039 Public
+main . . . . . . . . . . . . . .	P 	 00000000 _TEXT	Length= 0000003E Public
+  game_loop  . . . . . . . . . .	L 	 0000000E _TEXT	
+  switch_to_x  . . . . . . . . .	L 	 0000002F _TEXT	
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+board  . . . . . . . . . . . . .	Byte	 00000000 _DATA	
+message  . . . . . . . . . . . .	Byte	 0000000B _DATA	
+newline  . . . . . . . . . . . .	Byte	 00000023 _DATA	
+player . . . . . . . . . . . . .	Byte	 0000000A _DATA	
+win_message  . . . . . . . . . .	Byte	 00000026 _DATA	
+
+	   1 Warnings
+	   15 Errors

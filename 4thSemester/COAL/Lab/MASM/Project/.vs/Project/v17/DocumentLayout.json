@@ -1,0 +1,53 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\MyFiles\\My_Privater_Folder\\UNI\\4th Semester\\COAL\\Lab\\Project\\Project\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E38457B0-D5CC-4B3C-BE11-5AEAF008ADC4}|Project.vcxproj|C:\\MyFiles\\My_Privater_Folder\\UNI\\4th Semester\\COAL\\Lab\\Project\\Project\\Main.asm||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{E38457B0-D5CC-4B3C-BE11-5AEAF008ADC4}|Project.vcxproj|solutionrelative:Main.asm||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E38457B0-D5CC-4B3C-BE11-5AEAF008ADC4}|Project.vcxproj|C:\\MyFiles\\My_Privater_Folder\\UNI\\4th Semester\\COAL\\Lab\\Project\\Project\\Readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{E38457B0-D5CC-4B3C-BE11-5AEAF008ADC4}|Project.vcxproj|solutionrelative:Readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Readme.md",
+              "DocumentMoniker": "C:\\MyFiles\\My_Privater_Folder\\UNI\\4th Semester\\COAL\\Lab\\Project\\Project\\Readme.md",
+              "RelativeDocumentMoniker": "Readme.md",
+              "ToolTip": "C:\\MyFiles\\My_Privater_Folder\\UNI\\4th Semester\\COAL\\Lab\\Project\\Project\\Readme.md",
+              "RelativeToolTip": "Readme.md",
+              "ViewState": "AQIAAFwAAAAAAAAAAAAAAGMAAAACAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2024-06-02T12:03:20.056Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Main.asm",
+              "DocumentMoniker": "C:\\MyFiles\\My_Privater_Folder\\UNI\\4th Semester\\COAL\\Lab\\Project\\Project\\Main.asm",
+              "RelativeDocumentMoniker": "Main.asm",
+              "ToolTip": "C:\\MyFiles\\My_Privater_Folder\\UNI\\4th Semester\\COAL\\Lab\\Project\\Project\\Main.asm",
+              "RelativeToolTip": "Main.asm",
+              "ViewState": "AQIAAD8AAAAAAAAAAAAiwGIAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-06-02T12:02:54.529Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

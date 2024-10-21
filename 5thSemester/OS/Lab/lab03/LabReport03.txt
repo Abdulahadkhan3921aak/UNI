@@ -1,0 +1,32 @@
+for i in {1..20}; do echo "This is line $i" >> lab03; done
+head -n 5 lab03
+tail -n 5 lab03
+touch lab01
+touch lab02
+mv lab01 lab02 lab03 Lab04
+mkdir Lab04
+mv lab01 lab02 lab03 Lab04
+date > lab04
+date > lab04.txt
+cat lab04.txt
+ls > lab04.txt
+cat lab04.txt
+ls -l lab04
+chmod 027 lab04
+ls -l lab04
+chmod u=,g+w,o=rwx lab04
+ls -l lab04
+ls -l lab04.txt
+chmod 027 lab04.txt
+ls -l lab04.txt
+sudo chmod 027 lab04.txt
+ls -l lab04.txt
+chmod 405 lab04.txt
+ls -l lab04.txt
+chmod u+r,g-w,o=rx lab04
+ls -l lab04.txt
+chmod 666 lab04.txt
+ls -l lab04.txt
+chmod u+rw,g+rw,o+rw lab04
+ls -l lab04.txt
+history > LabReport03.txt

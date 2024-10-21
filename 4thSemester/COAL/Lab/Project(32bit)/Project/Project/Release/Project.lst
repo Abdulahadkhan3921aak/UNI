@@ -1,0 +1,557 @@
+Microsoft (R) Macro Assembler Version 14.40.33808.0	    06/04/24 22:44:13
+Main.asm						     Page 1 - 1
+
+
+				.386
+				.model flat, stdcall
+				.stack 4096
+
+				ExitProcess PROTO, dwExitCode:DWORD
+				WriteConsoleA PROTO, hConsoleOutput:DWORD, lpBuffer:PTR BYTE, nNumberOfCharsToWrite:DWORD, lpNumberOfCharsWritten:PTR DWORD, lpReserved:DWORD
+				ReadConsoleA PROTO, hConsoleInput:DWORD, lpBuffer:PTR BYTE, nNumberOfCharsToRead:DWORD, lpNumberOfCharsRead:PTR DWORD, lpReserved:DWORD
+				GetStdHandle PROTO, nStdHandle:DWORD
+				SetConsoleTextAttribute PROTO, hConsoleOutput:DWORD, wAttributes:WORD
+				SetConsoleCursorPosition PROTO, hConsoleOutput:DWORD, dwCursorPosition:DWORD
+				GetConsoleScreenBufferInfo PROTO, hConsoleOutput:DWORD, lpScreenBufferInfo:PTR CONSOLE_SCREEN_BUFFER_INFO
+				printf PROTO C, format:PTR BYTE, args:VARARG
+				getche PROTO
+				cls PROTO
+
+ 00000000			.data
+ 00000000 31 32 33 34 35	    board db '123456789', 0
+	   36 37 38 39 00
+ 0000000A 58 00			    player1 db 'X', 0
+ 0000000C 4F 00			    player2 db 'O', 0
+ 0000000E 58 00			    currentPlayer db 'X', 0
+ 00000010 45 6E 74 65 72	    prompt db 'Enter your move (1-9): $', 0
+	   20 79 6F 75 72
+	   20 6D 6F 76 65
+	   20 28 31 2D 39
+	   29 3A 20 24 00
+ 00000029 0D 0A 24		    newline db 0dh, 0ah, '$'
+ 0000002C 49 6E 76 61 6C	    invalidMoveMsg db 'Invalid move! Try again.', 0dh, 0ah, '$'
+	   69 64 20 6D 6F
+	   76 65 21 20 54
+	   72 79 20 61 67
+	   61 69 6E 2E 0D
+	   0A 24
+ 00000047 25 63 20 7C 20	    boardFormat db '%c | %c | %c', 0dh, 0ah, '---------', 0dh, 0ah, 0
+	   25 63 20 7C 20
+	   25 63 0D 0A 2D
+	   2D 2D 2D 2D 2D
+	   2D 2D 2D 0D 0A
+	   00
+ 00000061 2D 2D 2D 2D 2D	    rowSeparator db '---------', 0dh, 0ah, 0
+	   2D 2D 2D 2D 0D
+	   0A 00
+ 0000006D 00000000		    hStdOut dd ?
+ 00000071 0007			    whiteColor dw 7
+ 00000073 000C			    player1Color dw 12
+ 00000075 0009			    player2Color dw 9
+ 00000077 FF			    DRAW_VALUE db 0FFh
+ 00000078 01			    TRUE db 1
+ 00000079 00			    FALSE db 0
+ =-0000000B			    STD_OUTPUT_HANDLE equ -11
+ =-0000000A			    STD_INPUT_HANDLE equ -10
+ 0000007A 00			    singleChar BYTE ?
+ 0000007B  00000080 [		    inputBuffer BYTE 128 dup(?)
+	    00
+	   ]
+ 000000FB  00000080 [		    outputBuffer BYTE 128 dup(?)
+	    00
+	   ]
+ 0000017B 00000000		    hConsoleOutput DWORD ?
+ 0000017F 00000000		    hConsoleInput DWORD ?
+ 00000183 00000000		    charsWritten DWORD ?
+ 00000187 00000000		    charsRead DWORD ?
+ 0000018B 00000000		    bestVal dd ?
+ 0000018F 00000000		    bestMove dd ?
+
+ 00000000			.code
+ 00000000			start:
+				    ; Get handle to standard output
+				    invoke GetStdHandle, STD_OUTPUT_HANDLE
+ 00000007  A3 0000006D R	    mov hStdOut, eax
+
+				    ; Initialize the game
+ 0000000C  E8 0000004B		    call clearScreen
+ 00000011  E8 00000065		    call drawBoard
+
+ 00000016			mainLoop:
+				    ; Main game loop
+ 00000016  E8 00000060		    call drawBoard
+ 0000001B  80 3D 0000000E R	    cmp currentPlayer, 'X'
+	   58
+ 00000022  75 1B		    jne cpuMove
+ 00000024  E8 000001DC		    call getPlayerMove
+ 00000029  E8 00000219		    call updateBoard
+ 0000002E  E8 00000048		    call drawBoard
+ 00000033  E8 00000214		    call checkWin
+ 00000038  E8 00000231		    call switchPlayer
+ 0000003D  EB D7		    jmp mainLoop
+
+ 0000003F			cpuMove:
+ 0000003F  E8 0000034B		    call findBestMove
+ 00000044  E8 00000032		    call drawBoard
+ 00000049  E8 000001FE		    call checkWin
+ 0000004E  E8 0000021B		    call switchPlayer
+ 00000053  EB C1		    jmp mainLoop
+
+ 00000055			exit:
+				    invoke ExitProcess, 0
+
+ 0000005C			clearScreen proc
+				    ; Clear the console screen
+ 0000005C  E8 0000039A		    call cls
+ 00000061  C3			    ret
+ 00000062			clearScreen endp
+
+ 00000062			setColor proc , color:WORD
+				    invoke SetConsoleTextAttribute, hStdOut, color
+				    ret
+ 0000007B			setColor endp
+
+ 0000007B			drawBoard proc
+				    ; Draw the current state of the board
+				    invoke printf, addr newline
+
+				    ; Print the first row
+ 00000088  BB 00000000		    mov ebx, 0
+ 0000008D  53			    push ebx
+ 0000008E  E8 00000127		    call setColorForCell
+				    invoke printf, addr boardFormat, board[0], board[1], board[2]
+				    invoke printf, addr newline
+				    invoke printf, addr rowSeparator
+				    invoke printf, addr newline
+
+				    ; Print the second row
+ 000000F1  BB 00000003		    mov ebx, 3
+ 000000F6  53			    push ebx
+ 000000F7  E8 000000BE		    call setColorForCell
+				    invoke printf, addr boardFormat, board[3], board[4], board[5]
+				    invoke printf, addr newline
+				    invoke printf, addr rowSeparator
+				    invoke printf, addr newline
+
+				    ; Print the third row
+ 0000015A  BB 00000006		    mov ebx, 6
+ 0000015F  53			    push ebx
+ 00000160  E8 00000055		    call setColorForCell
+				    invoke printf, addr boardFormat, board[6], board[7], board[8]
+				    invoke printf, addr newline
+
+				    ; Reset to default color
+				    mov eax, whiteColor
+Main.asm(118) : error A2022:instruction operands must be the same size
+ 000001A9  E8 FFFFFEB4		    call setColor
+
+ 000001AE  C3			    ret
+ 000001AF			drawBoard endp
+
+ 000001AF			setColorForCell proc
+ 000001AF  5F			    pop edi
+ 000001B0  5E			    pop esi
+ 000001B1  57			    push edi
+				    ; Set color for each cell in the row
+ 000001B2  B9 00000003		    mov ecx, 3
+ 000001C2			setColorLoop:
+ 000001C2  8A 86 00000000 R	    mov al, board[esi]
+ 000001C8  3C 58		    cmp al, 'X'
+ 000001CA  74 15		    je setPlayer1Color
+ 000001CC  3C 4F		    cmp al, 'O'
+ 000001CE  74 22		    je setPlayer2Color
+				    invoke setColor, whiteColor
+ 000001DF  EB 20		    jmp setColorNext
+ 000001E1			setPlayer1Color:
+				    invoke setColor, player1Color
+ 000001F0  EB 0F		    jmp setColorNext
+ 000001F2			setPlayer2Color:
+				    invoke setColor, player2Color
+ 00000201			setColorNext:
+ 00000201  46			    inc esi
+ 00000202  E2 BE		    loop setColorLoop
+ 00000204  C3			    ret
+ 00000205			setColorForCell endp
+
+ 00000205			getPlayerMove proc
+				    ; Get the current player's move
+				    invoke printf, addr prompt
+				    invoke getche
+ 00000217  2C 30		    sub al, '0'
+ 00000219  3C 01		    cmp al, 1
+ 0000021B  72 17		    jb invalidMove
+ 0000021D  3C 09		    cmp al, 9
+ 0000021F  77 13		    ja invalidMove
+				    ; Check if the cell is already taken
+ 00000221  0F B6 D8		    movzx ebx, al
+ 00000224  4B			    dec ebx
+ 00000225  8A 83 00000000 R	    mov al, board[ebx]
+ 0000022B  3C 31		    cmp al, '1'
+ 0000022D  7C 05		    jl invalidMove
+ 0000022F  3C 39		    cmp al, '9'
+ 00000231  7F 01		    jg invalidMove
+				    ; Valid move
+ 00000233  C3			    ret
+ 00000234			invalidMove:
+				    ; Handle invalid move
+				    invoke printf, addr invalidMoveMsg
+ 00000241  E8 FFFFFFBF		    call getPlayerMove
+ 00000246  C3			    ret
+ 00000247			getPlayerMove endp
+
+ 00000247			updateBoard proc
+				    ; Update the board with the player's move
+ 00000247  0F B6 D8		    movzx ebx, al
+ 0000024A  4B			    dec ebx
+				    mov board[ebx], currentPlayer
+Main.asm(179) : error A2070:invalid instruction operands
+ 0000024B  C3			    ret
+ 0000024C			updateBoard endp
+
+ 0000024C			checkWin proc
+				    ; Check if there is a winner
+				    ; Rows
+				    cmp board[0], board[1]
+Main.asm(186) : error A2070:invalid instruction operands
+ 0000024C  75 02		    jne checkRow2
+				    cmp board[1], board[2]
+Main.asm(188) : error A2070:invalid instruction operands
+ 0000024E  74 1D		    je playerWins
+ 00000250			checkRow2:
+				    cmp board[3], board[4]
+Main.asm(191) : error A2070:invalid instruction operands
+ 00000250  75 02		    jne checkRow3
+				    cmp board[4], board[5]
+Main.asm(193) : error A2070:invalid instruction operands
+ 00000252  74 19		    je playerWins
+ 00000254			checkRow3:
+				    cmp board[6], board[7]
+Main.asm(196) : error A2070:invalid instruction operands
+ 00000254  75 02		    jne checkCols
+				    cmp board[7], board[8]
+Main.asm(198) : error A2070:invalid instruction operands
+ 00000256  74 15		    je playerWins
+ 00000258			checkCols:
+				    ; Columns
+				    cmp board[0], board[3]
+Main.asm(202) : error A2070:invalid instruction operands
+ 00000258  75 02		    jne checkCol2
+				    cmp board[3], board[6]
+Main.asm(204) : error A2070:invalid instruction operands
+ 0000025A  74 11		    je playerWins
+ 0000025C			checkCol2:
+				    cmp board[1], board[4]
+Main.asm(207) : error A2070:invalid instruction operands
+ 0000025C  75 02		    jne checkCol3
+				    cmp board[4], board[7]
+Main.asm(209) : error A2070:invalid instruction operands
+ 0000025E  74 0D		    je playerWins
+ 00000260			checkCol3:
+				    cmp board[2], board[5]
+Main.asm(212) : error A2070:invalid instruction operands
+ 00000260  75 02		    jne checkDiags
+				    cmp board[5], board[8]
+Main.asm(214) : error A2070:invalid instruction operands
+ 00000262  74 09		    je playerWins
+ 00000264			checkDiags:
+				    ; Diagonals
+				    cmp board[0], board[4]
+Main.asm(218) : error A2070:invalid instruction operands
+ 00000264  75 02		    jne checkDiag2
+				    cmp board[4], board[8]
+Main.asm(220) : error A2070:invalid instruction operands
+ 00000266  74 05		    je playerWins
+ 00000268			checkDiag2:
+				    cmp board[2], board[4]
+Main.asm(223) : error A2070:invalid instruction operands
+ 00000268  75 02		    jne checkDraw
+				    cmp board[4], board[6]
+Main.asm(225) : error A2070:invalid instruction operands
+ 0000026A  74 01		    je playerWins
+ 0000026C			checkDraw:
+				    ; Check for draw
+				    ; (stub implementation)
+ 0000026C  C3			    ret
+ 0000026D			playerWins:
+				    ; Handle player win
+				    ; (stub implementation)
+ 0000026D  C3			    ret
+ 0000026E			checkWin endp
+
+ 0000026E			switchPlayer proc
+				    cmp currentPlayer, player1
+Main.asm(238) : error A2070:invalid instruction operands
+ 0000026E  74 01		    je setPlayer2
+				    mov currentPlayer, player1
+Main.asm(240) : error A2070:invalid instruction operands
+ 00000270  C3			    ret
+ 00000271			setPlayer2:
+				    mov currentPlayer, player2
+Main.asm(243) : error A2070:invalid instruction operands
+ 00000271  C3			    ret
+ 00000272			switchPlayer endp
+
+ 00000272			minimax proc depth:DWORD, isMaximizing:DWORD
+				    ; Check if someone has won
+ 00000275  E8 FFFFFFD2		    call checkWin
+ 0000027A  83 F8 01		    cmp eax, 1
+ 0000027D  0F 84 000000FA	    je maxWins
+ 00000283  83 F8 FF		    cmp eax, -1
+ 00000286  0F 84 000000FA	    je minWins
+				    ; Check for draw
+				    ; (Check for full board)
+ 0000028C  B9 00000000		    mov ecx, 0
+ 00000291  BE 00000000 R	    mov esi, offset board
+ 00000296  BB 00000009		    mov ebx, 9
+ 0000029B			fullCheck:
+				    cmp byte ptr [esi+ecx], '1' + ecx
+Main.asm(260) : error A2032:invalid use of register
+ 0000029B  75 22		    jne notFull
+ 0000029D  41			    inc ecx
+ 0000029E  3B CB		    cmp ecx, ebx
+ 000002A0  75 F9		    jne fullCheck
+				    mov eax, DRAW_VALUE
+Main.asm(265) : error A2022:instruction operands must be the same size
+				    ret
+ 000002BF			notFull:
+
+				    ; Maximizing player's move
+				    cmp isMaximizing, TRUE
+Main.asm(270) : error A2070:invalid instruction operands
+ 000002BF  75 5E		    jne minimize
+				    ; Initialize best value to a very low number
+ 000002C1  C7 05 0000018B R	    mov bestVal, -9999
+	   FFFFD8F1
+				    ; Iterate over all cells
+ 000002CB  B9 00000000		    mov ecx, 0
+ 000002D0  BE 00000000 R	    mov esi, offset board
+ 000002D5  BB 00000009		    mov ebx, 9
+ 000002DA			maxLoop:
+				    cmp byte ptr [esi+ecx], '1' + ecx
+Main.asm(279) : error A2032:invalid use of register
+ 000002DA  75 35		    jne maxNext
+				    ; Make the move
+ 000002DC  C6 04 0E 4F		    mov byte ptr [esi+ecx], 'O'
+				    ; Call minimax recursively
+ 000002E0  FF 75 0C		    push isMaximizing
+ 000002E3  FF 75 08		    push depth
+ 000002E6  E8 FFFFFF87		    call minimax
+				    ; Undo the move
+				    mov byte ptr [esi+ecx], '1' + ecx
+Main.asm(288) : error A2032:invalid use of register
+				    ; Store the best value
+ 000002EB  3B 05 0000018B R	    cmp eax, bestVal
+ 000002F1  7E 1E		    jle maxNext
+ 000002F3  A3 0000018B R	    mov bestVal, eax
+ 00000311			maxNext:
+ 00000311  41			    inc ecx
+ 00000312  3B CB		    cmp ecx, ebx
+ 00000314  75 C4		    jne maxLoop
+ 00000316  A1 0000018B R	    mov eax, bestVal
+				    ret
+
+ 0000031F			minimize:
+				    ; Minimizing player's move
+				    ; Initialize best value to a very high number
+ 0000031F  C7 05 0000018B R	    mov bestVal, 9999
+	   0000270F
+				    ; Iterate over all cells
+ 00000329  B9 00000000		    mov ecx, 0
+ 0000032E  BE 00000000 R	    mov esi, offset board
+ 00000333  BB 00000009		    mov ebx, 9
+ 00000338			minLoop:
+				    cmp byte ptr [esi+ecx], '1' + ecx
+Main.asm(309) : error A2032:invalid use of register
+ 00000338  75 35		    jne minNext
+				    ; Make the move
+ 0000033A  C6 04 0E 58		    mov byte ptr [esi+ecx], 'X'
+				    ; Call minimax recursively
+ 0000033E  FF 75 0C		    push isMaximizing
+ 00000341  FF 75 08		    push depth
+ 00000344  E8 FFFFFF29		    call minimax
+				    ; Undo the move
+				    mov byte ptr [esi+ecx], '1' + ecx
+Main.asm(318) : error A2032:invalid use of register
+				    ; Store the best value
+ 00000349  3B 05 0000018B R	    cmp eax, bestVal
+ 0000034F  7D 1E		    jge minNext
+ 00000351  A3 0000018B R	    mov bestVal, eax
+ 0000036F			minNext:
+ 0000036F  41			    inc ecx
+ 00000370  3B CB		    cmp ecx, ebx
+ 00000372  75 C4		    jne minLoop
+ 00000374  A1 0000018B R	    mov eax, bestVal
+				    ret
+
+ 0000037D			maxWins:
+ 0000037D  B8 00000001		    mov eax, 1
+				    ret
+ 00000386			minWins:
+ 00000386  B8 FFFFFFFF		    mov eax, -1
+				    ret
+ 0000038F			minimax endp
+
+ 0000038F			findBestMove proc
+				    ; Initialize best value and best move
+ 0000038F  C7 05 0000018B R	    mov bestVal, -9999
+	   FFFFD8F1
+ 00000399  C7 05 0000018F R	    mov bestMove, -1
+	   FFFFFFFF
+				    ; Iterate over all cells
+ 000003A3  B9 00000000		    mov ecx, 0
+ 000003A8  BE 00000000 R	    mov esi, offset board
+ 000003AD  BB 00000009		    mov ebx, 9
+ 000003B2			moveLoop:
+				    cmp byte ptr [esi+ecx], '1' + ecx
+Main.asm(347) : error A2032:invalid use of register
+ 000003B2  75 37		    jne moveNext
+				    ; Make the move
+ 000003B4  C6 04 0E 4F		    mov byte ptr [esi+ecx], 'O'
+				    ; Call minimax
+				    push TRUE
+Main.asm(352) : error A2070:invalid instruction operands
+ 000003B8  6A 00		    push 0
+ 000003BA  E8 FFFFFEB3		    call minimax
+				    ; Undo the move
+				    mov byte ptr [esi+ecx], '1' + ecx
+Main.asm(356) : error A2032:invalid use of register
+				    ; Store the best move
+ 000003BF  3B 05 0000018B R	    cmp eax, bestVal
+ 000003C5  7E 24		    jle moveNext
+ 000003C7  A3 0000018B R	    mov bestVal, eax
+ 000003CC  89 0D 0000018F R	    mov bestMove, ecx
+ 000003EB			moveNext:
+ 000003EB  41			    inc ecx
+ 000003EC  3B CB		    cmp ecx, ebx
+ 000003EE  75 C2		    jne moveLoop
+				    ; Make the best move
+ 000003F0  8B 0D 0000018F R	    mov ecx, bestMove
+ 000003F6  C6 04 0E 4F		    mov byte ptr [esi+ecx], 'O'
+ 000003FA  C3			    ret
+ 000003FB			findBestMove endp
+
+ 000003FB			cls proc
+ 000003FB  66| B8 0003		    mov ax, 03h
+ 000003FF  CD 10		    int 10h
+ 00000401  C3			    ret
+ 00000402			cls endp
+
+				END start
+Microsoft (R) Macro Assembler Version 14.40.33808.0	    06/04/24 22:44:13
+Main.asm						     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+FLAT . . . . . . . . . . . . . .	GROUP
+STACK  . . . . . . . . . . . . .	32 Bit	 00001000 DWord	  Stack	  'STACK'	 
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000193 DWord	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000402 DWord	  Public  'CODE'	
+
+
+Procedures, parameters, and locals:
+
+                N a m e                 Type     Value    Attr
+
+ExitProcess  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
+GetConsoleScreenBufferInfo . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
+GetStdHandle . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
+ReadConsoleA . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
+SetConsoleCursorPosition . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
+SetConsoleTextAttribute  . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
+WriteConsoleA  . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
+checkWin . . . . . . . . . . . .	P Near	 0000024C _TEXT	Length= 00000022 Public STDCALL
+  checkRow2  . . . . . . . . . .	L Near	 00000250 _TEXT	
+  checkRow3  . . . . . . . . . .	L Near	 00000254 _TEXT	
+  checkCols  . . . . . . . . . .	L Near	 00000258 _TEXT	
+  checkCol2  . . . . . . . . . .	L Near	 0000025C _TEXT	
+  checkCol3  . . . . . . . . . .	L Near	 00000260 _TEXT	
+  checkDiags . . . . . . . . . .	L Near	 00000264 _TEXT	
+  checkDiag2 . . . . . . . . . .	L Near	 00000268 _TEXT	
+  checkDraw  . . . . . . . . . .	L Near	 0000026C _TEXT	
+  playerWins . . . . . . . . . .	L Near	 0000026D _TEXT	
+clearScreen  . . . . . . . . . .	P Near	 0000005C _TEXT	Length= 00000006 Public STDCALL
+cls  . . . . . . . . . . . . . .	P Near	 000003FB _TEXT	Length= 00000007 Public STDCALL
+drawBoard  . . . . . . . . . . .	P Near	 0000007B _TEXT	Length= 0000013F Public STDCALL
+findBestMove . . . . . . . . . .	P Near	 0000038F _TEXT	Length= 0000006C Public STDCALL
+  moveLoop . . . . . . . . . . .	L Near	 000003B2 _TEXT	
+  moveNext . . . . . . . . . . .	L Near	 000003EB _TEXT	
+getPlayerMove  . . . . . . . . .	P Near	 00000205 _TEXT	Length= 00000042 Public STDCALL
+  invalidMove  . . . . . . . . .	L Near	 00000234 _TEXT	
+getche . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
+minimax  . . . . . . . . . . . .	P Near	 00000272 _TEXT	Length= 0000011D Public STDCALL
+  depth  . . . . . . . . . . . .	DWord	 bp + 00000008
+  isMaximizing . . . . . . . . .	DWord	 bp + 0000000C
+  fullCheck  . . . . . . . . . .	L Near	 0000029B _TEXT	
+  notFull  . . . . . . . . . . .	L Near	 000002BF _TEXT	
+  maxLoop  . . . . . . . . . . .	L Near	 000002DA _TEXT	
+  maxNext  . . . . . . . . . . .	L Near	 00000311 _TEXT	
+  minimize . . . . . . . . . . .	L Near	 0000031F _TEXT	
+  minLoop  . . . . . . . . . . .	L Near	 00000338 _TEXT	
+  minNext  . . . . . . . . . . .	L Near	 0000036F _TEXT	
+  maxWins  . . . . . . . . . . .	L Near	 0000037D _TEXT	
+  minWins  . . . . . . . . . . .	L Near	 00000386 _TEXT	
+printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
+setColorForCell  . . . . . . . .	P Near	 000001BA _TEXT	Length= 0000004B Public STDCALL
+  setColorLoop . . . . . . . . .	L Near	 000001C2 _TEXT	
+  setPlayer1Color  . . . . . . .	L Near	 000001E1 _TEXT	
+  setPlayer2Color  . . . . . . .	L Near	 000001F2 _TEXT	
+  setColorNext . . . . . . . . .	L Near	 00000201 _TEXT	
+setColor . . . . . . . . . . . .	P Near	 00000062 _TEXT	Length= 00000019 Public STDCALL
+  color  . . . . . . . . . . . .	Word	 bp + 00000008
+switchPlayer . . . . . . . . . .	P Near	 0000026E _TEXT	Length= 00000004 Public STDCALL
+  setPlayer2 . . . . . . . . . .	L Near	 00000271 _TEXT	
+updateBoard  . . . . . . . . . .	P Near	 00000247 _TEXT	Length= 00000005 Public STDCALL
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 00000000h   
+@DataSize  . . . . . . . . . . .	Number	 00000000h   
+@Interface . . . . . . . . . . .	Number	 00000003h   
+@Model . . . . . . . . . . . . .	Number	 00000007h   
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 FLAT
+@fardata?  . . . . . . . . . . .	Text   	 FLAT
+@fardata . . . . . . . . . . . .	Text   	 FLAT
+@stack . . . . . . . . . . . . .	Text   	 FLAT
+DRAW_VALUE . . . . . . . . . . .	Byte	 00000077 _DATA	
+FALSE  . . . . . . . . . . . . .	Byte	 00000079 _DATA	
+STD_INPUT_HANDLE . . . . . . . .	Number	 -0000000Ah   
+STD_OUTPUT_HANDLE  . . . . . . .	Number	 -0000000Bh   
+TRUE . . . . . . . . . . . . . .	Byte	 00000078 _DATA	
+bestMove . . . . . . . . . . . .	DWord	 0000018F _DATA	
+bestVal  . . . . . . . . . . . .	DWord	 0000018B _DATA	
+boardFormat  . . . . . . . . . .	Byte	 00000047 _DATA	
+board  . . . . . . . . . . . . .	Byte	 00000000 _DATA	
+charsRead  . . . . . . . . . . .	DWord	 00000187 _DATA	
+charsWritten . . . . . . . . . .	DWord	 00000183 _DATA	
+cpuMove  . . . . . . . . . . . .	L Near	 0000003F _TEXT	
+currentPlayer  . . . . . . . . .	Byte	 0000000E _DATA	
+exit . . . . . . . . . . . . . .	L Near	 00000055 _TEXT	
+hConsoleInput  . . . . . . . . .	DWord	 0000017F _DATA	
+hConsoleOutput . . . . . . . . .	DWord	 0000017B _DATA	
+hStdOut  . . . . . . . . . . . .	DWord	 0000006D _DATA	
+inputBuffer  . . . . . . . . . .	Byte	 0000007B _DATA	
+invalidMoveMsg . . . . . . . . .	Byte	 0000002C _DATA	
+mainLoop . . . . . . . . . . . .	L Near	 00000016 _TEXT	
+newline  . . . . . . . . . . . .	Byte	 00000029 _DATA	
+outputBuffer . . . . . . . . . .	Byte	 000000FB _DATA	
+player1Color . . . . . . . . . .	Word	 00000073 _DATA	
+player1  . . . . . . . . . . . .	Byte	 0000000A _DATA	
+player2Color . . . . . . . . . .	Word	 00000075 _DATA	
+player2  . . . . . . . . . . . .	Byte	 0000000C _DATA	
+prompt . . . . . . . . . . . . .	Byte	 00000010 _DATA	
+rowSeparator . . . . . . . . . .	Byte	 00000061 _DATA	
+singleChar . . . . . . . . . . .	Byte	 0000007A _DATA	
+start  . . . . . . . . . . . . .	L Near	 00000000 _TEXT	Public STDCALL
+whiteColor . . . . . . . . . . .	Word	 00000071 _DATA	
+
+	   0 Warnings
+	   31 Errors

@@ -1,0 +1,18 @@
+﻿  Assembling Main.asm...
+MASM : warning A4018: invalid command-line option : /safeseh
+Main.asm(1): error A2008: syntax error : .
+Main.asm(2): error A2008: syntax error : .
+Main.asm(36): error A2024: invalid operand size for instruction
+Main.asm(45): error A2024: invalid operand size for instruction
+Main.asm(54): error A2024: invalid operand size for instruction
+Main.asm(63): error A2024: invalid operand size for instruction
+Main.asm(75): error A2024: invalid operand size for instruction
+Main.asm(84): error A2024: invalid operand size for instruction
+Main.asm(98): error A2008: syntax error : main
+Main.asm(98): error A2088: END directive required at end of file
+Main.asm(13): error A2006: undefined symbol : @DATA
+Main.asm(67): error A2031: must be index or base register
+Main.asm(78): error A2031: must be index or base register
+Main.asm(79): error A2031: must be index or base register
+Main.asm(81): error A2031: must be index or base register
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\BuildCustomizations\masm.targets(70,5): error MSB3721: The command "ml64.exe /c /nologo /safeseh /Zi /Fo"Project\x64\Release\Main.obj" /Fl"Project\x64\Release\Project.lst" /W3 /errorReport:prompt  /TaMain.asm" exited with code 1.

@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\MyFiles\\My_Privater_Folder\\UNI\\4th Semester\\COAL\\Lab\\Lab12\\task1\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E1CFF7E7-E3DE-46DE-B9ED-2152A16798FA}|task1.vcxproj|C:\\MyFiles\\My_Privater_Folder\\UNI\\4th Semester\\COAL\\Lab\\Lab12\\task1\\Main.asm||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{E1CFF7E7-E3DE-46DE-B9ED-2152A16798FA}|task1.vcxproj|solutionrelative:Main.asm||{8B382828-6202-11D1-8870-0000F87579D2}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Main.asm",
+              "DocumentMoniker": "C:\\MyFiles\\My_Privater_Folder\\UNI\\4th Semester\\COAL\\Lab\\Lab12\\task1\\Main.asm",
+              "RelativeDocumentMoniker": "Main.asm",
+              "ToolTip": "C:\\MyFiles\\My_Privater_Folder\\UNI\\4th Semester\\COAL\\Lab\\Lab12\\task1\\Main.asm",
+              "RelativeToolTip": "Main.asm",
+              "ViewState": "AQIAAF0AAAAAAAAAAAAAAHEAAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-05-26T10:10:45.736Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
